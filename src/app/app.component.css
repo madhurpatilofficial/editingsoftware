@@ -1,0 +1,38 @@
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .nv{
+    background-color: #1b9cfc;
+    margin-top: 0;
+    padding:0;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    box-shadow: 0 2px 5px #0000004d;
+    z-index: 998;
+    transition: all .3s ease;
+  }
+
+  .navbar-brand{
+    margin-left: 40px;
+    background: linear-gradient(90deg, #c91d78, #6610c1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-size: 2rem;
+    color: transparent;
+    cursor: pointer;
+  }
+
+  .nav-item{
+    margin-right: 20px;
+    font: size 2rem;
+
+  }

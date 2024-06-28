@@ -1,0 +1,143 @@
+.editor-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  margin-top: 5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px #d62d2d80;
+  transition: transform 0.7s ease-in-out;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+.editor {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: white;
+  min-height: 200px;
+  overflow: auto;
+  border-radius: 12px;
+  outline: none;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.editor-field {
+  width: 100%;
+}
+
+.editor {
+}
+
+.table-insert-form {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.fixed-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f1f1f1;
+}
+
+.savebtn {
+  margin-left: 16px;
+  width: 100px;
+}
+
+::ng-deep .mat-tooltip {
+  background-color: #333333; /* Tooltip background color */
+  color: #e71313; /* Tooltip text color */
+  font-size: 14px; /* Tooltip font size */
+  padding: 10px; /* Tooltip padding */
+  border-radius: 4px;
+  z-index: 1000 !important;
+}
+
+.mat-tooltip {
+  z-index: 1000 !important;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 9999;
+}
+
+/* Override SweetAlert styles */
+.swal2-popup {
+  width: 600px; /* Set the desired width */
+  height: auto; /* Set auto height or specify a fixed height */
+  max-height: 90%; /* Set a maximum height if needed */
+}
+
+.swal2-title {
+  font-size: 24px; /* Customize title font size */
+}
+
+.swal2-content {
+  font-size: 18px; /* Customize content font size */
+}
+
+.fresh-color-1 mat-icon {
+  color: #f44336; /* Red */
+}
+
+.fresh-color-2 mat-icon {
+  color: #4caf50; /* Green */
+}
+
+.fresh-color-3 mat-icon {
+  color: #2196f3; /* Blue */
+}
+
+.fresh-color-4 mat-icon {
+  color: #ffeb3b; /* Yellow */
+}
+
+.fresh-color-5 mat-icon {
+  color: #9c27b0; /* Purple */
+}
+
+.fresh-color-6 mat-icon {
+  color: #ff5722; /* Deep Orange */
+}
+
+.fresh-color-7 mat-icon {
+  color: #00bcd4; /* Cyan */
+}
+
+.fresh-color-8 mat-icon {
+  color: #8bc34a; /* Light Green */
+}
+
+.fresh-color-9 mat-icon {
+  color: #e91e63;
+}
+
+.fresh-color-10 mat-icon {
+  color: #3f51b5;
+}
+
+.table-insert-form {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e3f2fd;
+}
+
+.savebtn {
+  margin-top: 20px;
+}

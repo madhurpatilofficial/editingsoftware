@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  padding: 0;
+  margin: 0;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode .mat-toolbar {
+  background: #333 !important;
+}
+
+body.dark-mode .mat-slide-toggle {
+  color: #e0e0e0;
+}
+::ng-deep .mat-tooltip {
+  background-color: #333333; /* Tooltip background color */
+  color: #e71313; /* Tooltip text color */
+  font-size: 14px; /* Tooltip font size */
+  padding: 10px; /* Tooltip padding */
+  border-radius: 4px; /* Tooltip border radius */
+  z-index: 1000 !important;
+}
+
+
+.mat-tooltip {
+  z-index: 1000 !important;
+}
+
+
+::ng-deep .cdk-overlay-container {
+  z-index: 9999;
+} 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
