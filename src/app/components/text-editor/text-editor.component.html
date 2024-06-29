@@ -63,9 +63,6 @@
     <button mat-icon-button matTooltip="Insert Horizontal Rule" (click)="insertHorizontalRule()" class="fresh-color-1">
       <mat-icon>remove</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Table" (click)="toggleTableForm()">
-      <mat-icon>table_chart</mat-icon>
-    </button>
     <button mat-icon-button matTooltip="Toggle Blockquote" (click)="toggleBlockquote()" class="fresh-color-3">
       <mat-icon>format_quote</mat-icon>
     </button>
@@ -107,19 +104,6 @@
     </button>
     <button mat-icon-button matTooltip="Word Count" (click)="alert(getWordCount())">
       <mat-icon>spellcheck</mat-icon>
-    </button>
-  </div>
-
-  <div class="table-insert-form" *ngIf="showTableForm">
-    <h3>Insert Table</h3>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Rows" [(ngModel)]="tableRows" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Columns" [(ngModel)]="tableCols" />
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="insertTable()">
-      Insert Table
     </button>
   </div>
 </div>

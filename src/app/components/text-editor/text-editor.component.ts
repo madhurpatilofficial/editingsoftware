@@ -18,11 +18,6 @@ export class TextEditorComponent implements OnInit {
   }
   @ViewChild('editor', { static: true }) editor!: ElementRef<HTMLDivElement>;
   content: string = '';
-  tableRows: number = 3;
-  tableCols: number = 3;
-  showTableForm: boolean = false;
-  displayedColumns: string[] = ['col1', 'col2']; // Adjust columns as needed
-  dataSource = new MatTableDataSource<TableData>();
 
   ngOnInit(): void {
     this.loadContent();
@@ -94,20 +89,6 @@ export class TextEditorComponent implements OnInit {
 
   insertHorizontalRule(): void {
     this.format('insertHorizontalRule');
-  }
-
-  insertTable() {
-    const tableData: TableData[] = [];
-    for (let i = 0; i < this.tableRows; i++) {
-      const rowData: TableData = { col1: '', col2: '' }; // Add more columns as needed
-      tableData.push(rowData);
-    }
-    this.dataSource.data = tableData;
-    this.showTableForm = false; // Hide the table insertion form after insertion
-  }
-
-  toggleTableForm(): void {
-    this.showTableForm = !this.showTableForm;
   }
 
   insertLink(url: string): void {
