@@ -36,3 +36,42 @@
     font: size 2rem;
 
   }
+
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  footer {
+    background: #2aadff;
+    padding: 25px 0;
+    text-align: center;
+    margin: 0;
+  }
+  
+  footer .text span a:hover {
+    text-decoration: underline;
+  }
+  
+  .text > h6 {
+    font-size: medium;
+    font-weight: bold;
+  }
+  
+  a {
+    text-decoration: none;
+    color: rgb(19, 16, 214);
+  }
+  

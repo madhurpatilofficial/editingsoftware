@@ -15,11 +15,13 @@ import { MatTooltipModule} from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
