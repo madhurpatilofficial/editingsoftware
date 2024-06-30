@@ -109,9 +109,10 @@
       <mat-icon>code</mat-icon>
     </button>
 
-    <button mat-icon-button matTooltip="Voice Typing" (click)="startVoiceTyping()">
-      <mat-icon>mic</mat-icon>
+    <button mat-icon-button matTooltip="{{isVoiceTyping ? 'Stop Voice Typing' : 'Start Voice Typing'}}" (click)="startVoiceTyping()">
+      <mat-icon>{{isVoiceTyping ? 'mic_off' : 'mic'}}</mat-icon>
     </button>
+    
   </div>
 </div>
 <div class="editor-container">

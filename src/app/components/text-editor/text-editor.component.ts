@@ -28,6 +28,8 @@ comments: any;
   @ViewChild('editor', { static: true }) editor!: ElementRef<HTMLDivElement>;
   content: string = '';
   shortcuts: { [key: string]: () => void } = {};
+  recognition: any;
+  isVoiceTyping: boolean = false;
 
 
   ngOnInit(): void {
@@ -283,11 +285,6 @@ comments: any;
     }
   }
 
-  // Grammar and Spell Check
-  checkGrammarAndSpelling(): void {
-    const text = this.editor.nativeElement.innerText;
-    // You may handle grammar and spelling check logic here
-  }
 
   autoSave(): void {
     setInterval(() => {
@@ -304,26 +301,34 @@ comments: any;
 
   // Voice Typing
   startVoiceTyping(): void {
-    const recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
+    if (!this.recognition) {
+      this.recognition = new webkitSpeechRecognition();
+      this.recognition.continuous = true;
+      this.recognition.interimResults = true;
+      this.recognition.lang = 'en-US';
 
-    recognition.onresult = (event: any) => {
-      let interimTranscript = '';
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          this.editor.nativeElement.innerHTML += event.results[i][0].transcript;
-        } else {
-          interimTranscript += event.results[i][0].transcript;
+      this.recognition.onresult = (event: any) => {
+        let interimTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            this.editor.nativeElement.innerHTML += event.results[i][0].transcript;
+          } else {
+            interimTranscript += event.results[i][0].transcript;
+          }
         }
-      }
-    };
+      };
 
-    recognition.onerror = (event: any) => {
-      console.error(event.error);
-    };
+      this.recognition.onerror = (event: any) => {
+        console.error(event.error);
+      };
+    }
 
-    recognition.start();
+    if (this.isVoiceTyping) {
+      this.recognition.stop();
+      this.isVoiceTyping = false;
+    } else {
+      this.recognition.start();
+      this.isVoiceTyping = true;
+    }
   }
 }
