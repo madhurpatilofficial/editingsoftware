@@ -75,19 +75,12 @@
     <button mat-icon-button matTooltip="Insert Time" (click)="insertTime()" class="fresh-color-6">
       <mat-icon>access_time</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Fullscreen" (click)="toggleFullscreen()" class="fresh-color-7">
-      <mat-icon>fullscreen</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="Print" (click)="printContent()" class="fresh-color-8">
-      <mat-icon>print</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="Download as HTML" (click)="downloadAsHTML()" class="fresh-color-9">
-      <mat-icon>code</mat-icon>
-    </button>
+
     <button mat-icon-button matTooltip="Download as Text" (click)="downloadAsText()" class="fresh-color-10">
       <mat-icon>description</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Special Character" (click)="insertSpecialCharacter('©')" class="fresh-color-1">
+    <button mat-icon-button matTooltip="Insert Special Character" (click)="insertSpecialCharacter('©')"
+      class="fresh-color-1">
       <mat-icon>copyright</mat-icon>
     </button>
     <button mat-icon-button matTooltip="Insert Emoji" (click)="insertEmoji('😊')" class="fresh-color-2">
@@ -105,17 +98,28 @@
     <button mat-icon-button matTooltip="Word Count" (click)="alert(getWordCount())">
       <mat-icon>spellcheck</mat-icon>
     </button>
+    <button mat-icon-button matTooltip="Fullscreen" (click)="toggleFullscreen()" class="fresh-color-7">
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Print" (click)="printContent()" class="fresh-color-8">
+      <mat-icon>print</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Download as HTML" (click)="downloadAsHTML()" class="fresh-color-9">
+      <mat-icon>code</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Voice Typing" (click)="startVoiceTyping()">
+      <mat-icon>mic</mat-icon>
+    </button>
   </div>
 </div>
+  <div class="editor-container">
+    <mat-form-field appearance="fill" class="editor-field">
+      <div #editor class="editor" contenteditable="true" [(ngModel)]="content"></div>
+    </mat-form-field>
 
-<div class="editor-container">
-  <mat-form-field appearance="fill" class="editor-field">
-    <div #editor class="editor" contenteditable="true" [(ngModel)]="content"></div>
-  </mat-form-field>
 
-  
-  <button type="button" class="btn btn-success savebtn" (click)="saveContent()">
-    Save
-  </button>
-
-</div>
+    <button type="button" class="btn btn-success savebtn" (click)="saveContent()">
+      Save
+    </button>
+  </div>

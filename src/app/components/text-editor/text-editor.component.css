@@ -27,15 +27,12 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 25px;
   margin-bottom: 10px;
 }
 
 .editor-field {
   width: 100%;
-}
-
-.editor {
 }
 
 .table-insert-form {
