@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FooterComponent } from './components/footer/footer.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatInputModule,
     MatTooltipModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
   ],
   providers: [
     provideAnimationsAsync()

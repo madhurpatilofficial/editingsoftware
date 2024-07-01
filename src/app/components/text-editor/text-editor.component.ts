@@ -1,8 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { OverlayRef, OverlayConfig, Overlay } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+} from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { marked } from 'marked';
 import Swal from 'sweetalert2';
 
 export interface TableData {
@@ -21,7 +28,7 @@ declare var webkitSpeechRecognition: any;
   styleUrls: ['./text-editor.component.css'],
 })
 export class TextEditorComponent implements OnInit {
-comments: any;
+  comments: any;
   alert(arg0: number) {
     throw new Error('Method not implemented.');
   }
@@ -30,7 +37,8 @@ comments: any;
   shortcuts: { [key: string]: () => void } = {};
   recognition: any;
   isVoiceTyping: boolean = false;
-
+  fontSize: number = 16; // Adjust default font size as needed
+  fontFamily: string = 'Arial';
 
   ngOnInit(): void {
     this.loadContent();
@@ -61,12 +69,12 @@ comments: any;
     }
   }
 
-  onFontSizeChange(event: any): void {
-    this.format('fontSize', event.value);
+  onFontSizeChange(event: any) {
+    this.fontSize = event.target.value;
   }
 
-  onFontFamilyChange(event: any): void {
-    this.format('fontName', event.value);
+  onFontFamilyChange(event: any) {
+    this.fontFamily = event.target.value;
   }
 
   alignText(align: 'left' | 'center' | 'right' | 'justify'): void {
@@ -131,10 +139,6 @@ comments: any;
 
   toggleBlockquote(): void {
     this.format('formatBlock', '<blockquote>');
-  }
-
-  toggleCode(): void {
-    this.format('formatBlock', '<code>');
   }
 
   insertDate(): void {
@@ -263,19 +267,7 @@ comments: any;
       pdf.save('content.pdf');
     });
   }
-  // Table Insertion and Management
-  insertTable(rows: number, cols: number): void {
-    let table = '<table border="1">';
-    for (let i = 0; i < rows; i++) {
-      table += '<tr>';
-      for (let j = 0; j < cols; j++) {
-        table += '<td>&nbsp;</td>';
-      }
-      table += '</tr>';
-    }
-    table += '</table>';
-    this.format('insertHTML', table);
-  }
+
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     const keyCombo = `${event.ctrlKey ? 'Ctrl+' : ''}${event.key}`;
@@ -284,7 +276,6 @@ comments: any;
       this.shortcuts[keyCombo]();
     }
   }
-
 
   autoSave(): void {
     setInterval(() => {
@@ -311,7 +302,8 @@ comments: any;
         let interimTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) {
-            this.editor.nativeElement.innerHTML += event.results[i][0].transcript;
+            this.editor.nativeElement.innerHTML +=
+              event.results[i][0].transcript;
           } else {
             interimTranscript += event.results[i][0].transcript;
           }
@@ -329,6 +321,70 @@ comments: any;
     } else {
       this.recognition.start();
       this.isVoiceTyping = true;
+    }
+  }
+
+  insertTableCaption(caption: string): void {
+    const tableCaption = `<caption>${caption}</caption>`;
+    const selection = window.getSelection();
+    if (selection) {
+      this.format('insertHTML', tableCaption);
+    }
+  }
+
+  insertFootnote(): void {
+    const selection = window.getSelection();
+    if (selection) {
+      const footnote = `<sup>[Footnote]</sup>`;
+      this.format('insertHTML', footnote);
+    }
+  }
+
+  openTableInputDialog(): void {
+    const rows = prompt('Enter number of rows:', '3');
+    const cols = prompt('Enter number of columns:', '3');
+
+    if (rows && cols) {
+      const parsedRows = parseInt(rows);
+      const parsedCols = parseInt(cols);
+
+      if (!isNaN(parsedRows) && !isNaN(parsedCols)) {
+        let tableHtml = `
+          <table class="custom-table" style="width: 100%; max-width: 100%; border-collapse: collapse; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <thead>
+              <tr>`;
+        for (let j = 0; j < parsedCols; j++) {
+          tableHtml +=
+            '<th style="border: 1px solid #ddd; padding: 12px; background-color: #f4f4f4;">Column</th>';
+        }
+        tableHtml += `
+              </tr>
+            </thead>
+            <tbody>`;
+        for (let i = 0; i < parsedRows; i++) {
+          tableHtml += '<tr>';
+          for (let j = 0; j < parsedCols; j++) {
+            tableHtml +=
+              '<td style="border: 1px solid #ddd; padding: 12px; height: 40px;">&nbsp;</td>';
+          }
+          tableHtml += '</tr>';
+        }
+        tableHtml += `
+            </tbody>
+          </table>`;
+        this.insertHtmlAtCursor(tableHtml); // Insert the table HTML into the editor
+      } else {
+        alert('Please enter valid numbers for rows and columns.');
+      }
+    }
+  }
+
+  insertHtmlAtCursor(html: string): void {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      const fragment = range.createContextualFragment(html);
+      range.insertNode(fragment);
     }
   }
 }

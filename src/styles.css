@@ -6,13 +6,20 @@ body {
 
 body.dark-mode {
   background-color: #121212;
-  color: #e0e0e0;
+  color: #424141;
 }
 
 body.dark-mode .mat-toolbar {
   background: #333 !important;
 }
 
+body.dark-mode .editor-container {
+  background-color: #000000;
+}
+
+body.dark-mode .editor {
+  background-color: #c2c2c2;
+}
 body.dark-mode .mat-slide-toggle {
   color: #e0e0e0;
 }
@@ -20,19 +27,23 @@ body.dark-mode .mat-slide-toggle {
   background-color: #333333; /* Tooltip background color */
   color: #e71313; /* Tooltip text color */
   font-size: 14px; /* Tooltip font size */
-  padding: 10px; /* Tooltip padding */
+  padding: 10px; /* Torgb(0, 0, 0)adding */
   border-radius: 4px; /* Tooltip border radius */
   z-index: 1000 !important;
 }
-
 
 .mat-tooltip {
   z-index: 1000 !important;
 }
 
-
 ::ng-deep .cdk-overlay-container {
   z-index: 9999;
-} 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
