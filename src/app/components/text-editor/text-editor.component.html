@@ -226,14 +226,18 @@
     >
       <mat-icon>wrap_text</mat-icon>
     </button>
-    <button
-      mat-icon-button
-      title="Highlight"
-      (click)="toggleHighlight()"
-      class="fresh-color-4"
-    >
-      <mat-icon>highlight</mat-icon>
-    </button>
+    <div class="highlight-dropdown" (mouseenter)="showHighlightOptions = true" (mouseleave)="showHighlightOptions = false">
+      <button mat-icon-button title="Highlight">
+        <mat-icon>highlight</mat-icon>
+      </button>
+      <div class="dropdown-content" *ngIf="showHighlightOptions">
+        <!-- Loop through colors array to create buttons or options -->
+        <button mat-button *ngFor="let color of colors" (click)="applyHighlight(color)">
+          <div class="color-box" [style.backgroundColor]="color"></div>
+        </button>
+      </div>
+    </div>
+
     <button
       mat-icon-button
       title="Toggle Read-Only"
@@ -317,8 +321,6 @@
       class="editor"
       contenteditable="true"
       [(ngModel)]="content"
-      [style.font-size]="fontSize + 'px'"
-      [style.font-family]="fontFamily"
     ></div>
   </mat-form-field>
 </div>

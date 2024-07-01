@@ -37,8 +37,9 @@ export class TextEditorComponent implements OnInit {
   shortcuts: { [key: string]: () => void } = {};
   recognition: any;
   isVoiceTyping: boolean = false;
-  fontSize: number = 16; // Adjust default font size as needed
-  fontFamily: string = 'Arial';
+  colors: string[] = ['yellow', 'cyan', 'green', 'lightgreen']; // Define your colors array
+  showHighlightOptions: boolean = false;
+  highlightColor: string | null = null;
 
   ngOnInit(): void {
     this.loadContent();
@@ -67,14 +68,6 @@ export class TextEditorComponent implements OnInit {
       this.content = savedContent;
       this.editor.nativeElement.innerHTML = savedContent;
     }
-  }
-
-  onFontSizeChange(event: any) {
-    this.fontSize = event.target.value;
-  }
-
-  onFontFamilyChange(event: any) {
-    this.fontFamily = event.target.value;
   }
 
   alignText(align: 'left' | 'center' | 'right' | 'justify'): void {
@@ -239,7 +232,10 @@ export class TextEditorComponent implements OnInit {
     );
   }
 
-  toggleHighlight(color: string = 'yellow'): void {
+  toggleHighlight(): void {
+    this.showHighlightOptions = !this.showHighlightOptions;
+  }
+  applyHighlight(color: string): void {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
       const currentColor = document.queryCommandValue('backColor');
@@ -247,7 +243,12 @@ export class TextEditorComponent implements OnInit {
       this.format('backColor', newColor);
     }
   }
-  // Commenting System
+
+  hideHighlightOptions(): void {
+    this.showHighlightOptions = false;
+  }
+
+  
   addComment(text: string): void {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
