@@ -1,118 +1,285 @@
 <div class="editor-container">
-
   <div class="toolbar">
-    <button mat-icon-button matTooltip="Bold" aria-label="Bold" (click)="format('bold')" class="fresh-color-1">
+    <button
+      mat-icon-button
+      title="Bold"
+      aria-label="Bold"
+      (click)="format('bold')"
+      class="fresh-color-1"
+    >
       <mat-icon>format_bold</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Italic" (click)="format('italic')" class="fresh-color-2">
+    <button
+      mat-icon-button
+      title="Italic"
+      (click)="format('italic')"
+      class="fresh-color-2"
+    >
       <mat-icon>format_italic</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Underline" (click)="toggleUnderline()" class="fresh-color-3">
+    <button
+      mat-icon-button
+      title="Underline"
+      (click)="toggleUnderline()"
+      class="fresh-color-3"
+    >
       <mat-icon>format_underlined</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Ordered List" (click)="format('insertOrderedList')" class="fresh-color-4">
+    <button
+      mat-icon-button
+      title="Ordered List"
+      (click)="format('insertOrderedList')"
+      class="fresh-color-4"
+    >
       <mat-icon>format_list_numbered</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Unordered List" (click)="format('insertUnorderedList')" class="fresh-color-5">
+    <button
+      mat-icon-button
+      title="Unordered List"
+      (click)="format('insertUnorderedList')"
+      class="fresh-color-5"
+    >
       <mat-icon>format_list_bulleted</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Undo" (click)="format('undo')" class="fresh-color-6">
+    <button
+      mat-icon-button
+      title="Undo"
+      (click)="format('undo')"
+      class="fresh-color-6"
+    >
       <mat-icon>undo</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Redo" (click)="format('redo')" class="fresh-color-7">
+    <button
+      mat-icon-button
+      title="Redo"
+      (click)="format('redo')"
+      class="fresh-color-7"
+    >
       <mat-icon>redo</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Align Left" (click)="alignText('left')" class="fresh-color-8">
+    <button
+      mat-icon-button
+      title="Align Left"
+      (click)="alignText('left')"
+      class="fresh-color-8"
+    >
       <mat-icon>format_align_left</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Align Center" (click)="alignText('center')" class="fresh-color-9">
+    <button
+      mat-icon-button
+      title="Align Center"
+      (click)="alignText('center')"
+      class="fresh-color-9"
+    >
       <mat-icon>format_align_center</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Align Right" (click)="alignText('right')" class="fresh-color-10">
+    <button
+      mat-icon-button
+      title="Align Right"
+      (click)="alignText('right')"
+      class="fresh-color-10"
+    >
       <mat-icon>format_align_right</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Justify" (click)="alignText('justify')" class="fresh-color-1">
+    <button
+      mat-icon-button
+      title="Justify"
+      (click)="alignText('justify')"
+      class="fresh-color-1"
+    >
       <mat-icon>format_align_justify</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Heading 1" (click)="setHeading(1)" class="fresh-color-2">
+    <button
+      mat-icon-button
+      title="Heading 1"
+      (click)="setHeading(1)"
+      class="fresh-color-2"
+    >
       <mat-icon>looks_one</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Heading 2" (click)="setHeading(2)" class="fresh-color-3">
+    <button
+      mat-icon-button
+      title="Heading 2"
+      (click)="setHeading(2)"
+      class="fresh-color-3"
+    >
       <mat-icon>looks_two</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Heading 3" (click)="setHeading(3)" class="fresh-color-4">
+    <button
+      mat-icon-button
+      title="Heading 3"
+      (click)="setHeading(3)"
+      class="fresh-color-4"
+    >
       <mat-icon>looks_3</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Subscript" (click)="toggleSubscript()" class="fresh-color-5">
+    <button
+      mat-icon-button
+      title="Subscript"
+      (click)="toggleSubscript()"
+      class="fresh-color-5"
+    >
       <mat-icon>vertical_align_bottom</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Superscript" (click)="toggleSuperscript()" class="fresh-color-6">
+    <button
+      mat-icon-button
+      title="Superscript"
+      (click)="toggleSuperscript()"
+      class="fresh-color-6"
+    >
       <mat-icon>vertical_align_top</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Strikethrough" (click)="toggleStrikethrough()" class="fresh-color-7">
+    <button
+      mat-icon-button
+      title="Strikethrough"
+      (click)="toggleStrikethrough()"
+      class="fresh-color-7"
+    >
       <mat-icon>strikethrough_s</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Clear Formatting" (click)="clearFormatting()" class="fresh-color-8">
+    <button
+      mat-icon-button
+      title="Clear Formatting"
+      (click)="clearFormatting()"
+      class="fresh-color-8"
+    >
       <mat-icon>format_clear</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Indent" (click)="indent()" class="fresh-color-9">
+    <button
+      mat-icon-button
+      title="Indent"
+      (click)="indent()"
+      class="fresh-color-9"
+    >
       <mat-icon>format_indent_increase</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Outdent" (click)="outdent()" class="fresh-color-10">
+    <button
+      mat-icon-button
+      title="Outdent"
+      (click)="outdent()"
+      class="fresh-color-10"
+    >
       <mat-icon>format_indent_decrease</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Horizontal Rule" (click)="insertHorizontalRule()" class="fresh-color-1">
+    <button
+      mat-icon-button
+      title="Insert Horizontal Rule"
+      (click)="insertHorizontalRule()"
+      class="fresh-color-1"
+    >
       <mat-icon>remove</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Toggle Blockquote" (click)="toggleBlockquote()" class="fresh-color-3">
+    <button
+      mat-icon-button
+      title="Toggle Blockquote"
+      (click)="toggleBlockquote()"
+      class="fresh-color-3"
+    >
       <mat-icon>format_quote</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Toggle Code" (click)="toggleCode()" class="fresh-color-4">
+    <button
+      mat-icon-button
+      title="Toggle Code"
+      (click)="toggleCode()"
+      class="fresh-color-4"
+    >
       <mat-icon>code</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Date" (click)="insertDate()" class="fresh-color-5">
+    <button
+      mat-icon-button
+      title="Insert Date"
+      (click)="insertDate()"
+      class="fresh-color-5"
+    >
       <mat-icon>date_range</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Time" (click)="insertTime()" class="fresh-color-6">
+    <button
+      mat-icon-button
+      title="Insert Time"
+      (click)="insertTime()"
+      class="fresh-color-6"
+    >
       <mat-icon>access_time</mat-icon>
     </button>
 
-    <button mat-icon-button matTooltip="Download as Text" (click)="downloadAsText()" class="fresh-color-10">
+    <button
+      mat-icon-button
+      title="Download as Text"
+      (click)="downloadAsText()"
+      class="fresh-color-10"
+    >
       <mat-icon>description</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Special Character" (click)="insertSpecialCharacter('©')"
-      class="fresh-color-1">
+    <button
+      mat-icon-button
+      title="Insert Special Character"
+      (click)="insertSpecialCharacter('©')"
+      class="fresh-color-1"
+    >
       <mat-icon>copyright</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Emoji" (click)="insertEmoji('😊')" class="fresh-color-2">
+    <button
+      mat-icon-button
+      title="Insert Emoji"
+      (click)="insertEmoji('😊')"
+      class="fresh-color-2"
+    >
       <mat-icon>insert_emoticon</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Insert Line Break" (click)="insertLineBreak()" class="fresh-color-3">
+    <button
+      mat-icon-button
+      title="Insert Line Break"
+      (click)="insertLineBreak()"
+      class="fresh-color-3"
+    >
       <mat-icon>wrap_text</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Highlight" (click)="toggleHighlight()" class="fresh-color-4">
+    <button
+      mat-icon-button
+      title="Highlight"
+      (click)="toggleHighlight()"
+      class="fresh-color-4"
+    >
       <mat-icon>highlight</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Toggle Read-Only" (click)="toggleReadOnly()">
+    <button mat-icon-button title="Toggle Read-Only" (click)="toggleReadOnly()">
       <mat-icon>lock</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Word Count" (click)="alert(getWordCount())">
+    <button mat-icon-button title="Word Count" (click)="alert(getWordCount())">
       <mat-icon>spellcheck</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Fullscreen" (click)="toggleFullscreen()" class="fresh-color-7">
+    <button
+      mat-icon-button
+      title="Fullscreen"
+      (click)="toggleFullscreen()"
+      class="fresh-color-7"
+    >
       <mat-icon>fullscreen</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Print" (click)="printContent()" class="fresh-color-8">
+    <button
+      mat-icon-button
+      title="Print"
+      (click)="printContent()"
+      class="fresh-color-8"
+    >
       <mat-icon>print</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Download as HTML" (click)="downloadAsHTML()" class="fresh-color-9">
+    <button
+      mat-icon-button
+      title="Download as HTML"
+      (click)="downloadAsHTML()"
+      class="fresh-color-9"
+    >
       <mat-icon>code</mat-icon>
     </button>
 
-    <button mat-icon-button matTooltip="{{isVoiceTyping ? 'Stop Voice Typing' : 'Start Voice Typing'}}" (click)="startVoiceTyping()">
-      <mat-icon>{{isVoiceTyping ? 'mic_off' : 'mic'}}</mat-icon>
+    <button
+      mat-icon-button
+      title="{{ isVoiceTyping ? 'Stop Voice Typing' : 'Start Voice Typing' }}"
+      (click)="startVoiceTyping()"
+    >
+      <mat-icon>{{ isVoiceTyping ? "mic_off" : "mic" }}</mat-icon>
     </button>
-    
   </div>
 </div>
 <div class="editor-container">
@@ -120,6 +287,11 @@
     Save
   </button>
   <mat-form-field appearance="fill" class="editor-field">
-    <div #editor class="editor" contenteditable="true" [(ngModel)]="content"></div>
+    <div
+      #editor
+      class="editor"
+      contenteditable="true"
+      [(ngModel)]="content"
+    ></div>
   </mat-form-field>
 </div>
