@@ -138,3 +138,19 @@
 .savebtn {
   margin-top: 20px;
 }
+
+.toolbar button[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333333;
+  color: #6dc4fd;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  z-index: 1;
+}
