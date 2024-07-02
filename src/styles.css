@@ -47,3 +47,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.cursor-pointer {cursor: pointer;}
+.cursor-crosshair {cursor: crosshair;}
+.cursor-eresize {cursor: e-resize;}
+.cursor-move {cursor: move;}

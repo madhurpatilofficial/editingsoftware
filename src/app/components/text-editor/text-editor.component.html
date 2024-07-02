@@ -226,17 +226,23 @@
     >
       <mat-icon>wrap_text</mat-icon>
     </button>
-    <div class="highlight-dropdown" (mouseenter)="showHighlightOptions = true" (mouseleave)="showHighlightOptions = false">
-      <button mat-icon-button title="Highlight">
+    <div
+      class="highlight-dropdown"
+      (mouseenter)="showHighlightOptions = true"
+      (mouseleave)="showHighlightOptions = false"
+    >
+      <button mat-icon-button title="Highlight" class="fresh-color-6">
         <mat-icon>highlight</mat-icon>
       </button>
       <div class="dropdown-content" *ngIf="showHighlightOptions">
         <div>
-          <color-sketch (onChangeComplete)="handleColorChange($event)"></color-sketch>
+          <color-sketch
+            (onChangeComplete)="handleColorChange($event)"
+          ></color-sketch>
         </div>
       </div>
     </div>
-    
+
     <button
       mat-icon-button
       title="Toggle Read-Only"
@@ -314,6 +320,7 @@
   <button type="button" class="btn btn-success savebtn" (click)="saveContent()">
     Save
   </button>
+
   <mat-form-field appearance="fill" class="editor-field">
     <div
       #editor
@@ -323,5 +330,3 @@
     ></div>
   </mat-form-field>
 </div>
-
-

@@ -7,6 +7,8 @@ import {
   ElementRef,
   HostListener,
   OnDestroy,
+  Renderer2,
+  ChangeDetectorRef,
 } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -62,6 +64,9 @@ export class TextEditorComponent implements OnInit {
   ];
   showHighlightOptions: boolean = false;
   highlightColor: string | null = null;
+  isSpeaking: boolean = false;
+  textToSpeak: string = '';
+
 
   ngOnInit(): void {
     this.loadContent();
@@ -368,7 +373,6 @@ export class TextEditorComponent implements OnInit {
   }
 
   openTableInputDialog(): void {
-    // Create overlay
     const overlay = document.createElement('div');
     overlay.style.cssText = `
       position: fixed;
