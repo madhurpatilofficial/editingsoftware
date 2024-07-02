@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { ColorEvent } from 'ngx-color';
 import Swal from 'sweetalert2';
 
 export interface TableData {
@@ -37,7 +38,28 @@ export class TextEditorComponent implements OnInit {
   shortcuts: { [key: string]: () => void } = {};
   recognition: any;
   isVoiceTyping: boolean = false;
-  colors: string[] = ['yellow', 'cyan', 'green', 'lightgreen']; // Define your colors array
+  colors = [
+    '#FFEB3B',
+    '#FFC107',
+    '#FF9800',
+    '#FF5722',
+    '#F44336',
+    '#E91E63',
+    '#9C27B0',
+    '#673AB7',
+    '#3F51B5',
+    '#2196F3',
+    '#03A9F4',
+    '#00BCD4',
+    '#009688',
+    '#4CAF50',
+    '#8BC34A',
+    '#CDDC39',
+    '#FFEB3B',
+    '#FFC107',
+    '#FF9800',
+    '#FF5722',
+  ];
   showHighlightOptions: boolean = false;
   highlightColor: string | null = null;
 
@@ -235,6 +257,7 @@ export class TextEditorComponent implements OnInit {
   toggleHighlight(): void {
     this.showHighlightOptions = !this.showHighlightOptions;
   }
+
   applyHighlight(color: string): void {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
@@ -248,7 +271,10 @@ export class TextEditorComponent implements OnInit {
     this.showHighlightOptions = false;
   }
 
-  
+  handleColorChange($event: ColorEvent): void {
+    this.applyHighlight($event.color.hex);
+  }
+
   addComment(text: string): void {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
@@ -342,50 +368,208 @@ export class TextEditorComponent implements OnInit {
   }
 
   openTableInputDialog(): void {
-    const rows = prompt('Enter number of rows:', '3');
-    const cols = prompt('Enter number of columns:', '3');
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+    `;
 
-    if (rows && cols) {
-      const parsedRows = parseInt(rows);
-      const parsedCols = parseInt(cols);
+    const dialog = document.createElement('dialog');
+    dialog.style.cssText = `
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensures the dialog takes the full height of the screen */
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translateY(-50%);
+  `;
 
-      if (!isNaN(parsedRows) && !isNaN(parsedCols)) {
-        let tableHtml = `
-          <table class="custom-table" style="width: 100%; max-width: 100%; border-collapse: collapse; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-            <thead>
-              <tr>`;
-        for (let j = 0; j < parsedCols; j++) {
-          tableHtml +=
-            '<th style="border: 1px solid #ddd; padding: 12px; background-color: #f4f4f4;">Column</th>';
+    dialog.innerHTML = `
+      <style>
+        .table-dialog {
+          font-family: 'Arial', sans-serif;
+          background-color: #f8f9fa;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 24px;
+          width: 320px;
+          border: none;
+          margin: auto; /* Center the content inside the dialog */
         }
-        tableHtml += `
-              </tr>
-            </thead>
-            <tbody>`;
-        for (let i = 0; i < parsedRows; i++) {
-          tableHtml += '<tr>';
+        .table-dialog h2 {
+          color: #2c3e50;
+          font-size: 24px;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        .table-dialog form {
+          display: flex;
+          flex-direction: column;
+        }
+        .table-dialog .input-group {
+          margin-bottom: 16px;
+        }
+        .table-dialog label {
+          display: block;
+          margin-bottom: 8px;
+          color: #34495e;
+          font-weight: bold;
+        }
+        .table-dialog input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          border: 2px solid #bdc3c7;
+          border-radius: 4px;
+          font-size: 16px;
+          transition: border-color 0.3s ease;
+        }
+        .table-dialog input[type="number"]:focus {
+          border-color: #3498db;
+          outline: none;
+        }
+        .table-dialog .button-group {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 20px;
+        }
+        .table-dialog button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .table-dialog button[type="submit"] {
+          background-color: #2ecc71;
+          color: white;
+        }
+        .table-dialog button[type="submit"]:hover {
+          background-color: #27ae60;
+        }
+        .table-dialog button[type="button"] {
+          background-color: #e74c3c;
+          color: white;
+        }
+        .table-dialog button[type="button"]:hover {
+          background-color: #c0392b;
+        }
+        .table-dialog button:active {
+          transform: scale(0.98);
+        }
+      </style>
+      <div class="table-dialog">
+        <form method="dialog">
+          <h2>Insert Table</h2>
+          <div class="input-group">
+            <label for="rows">Number of rows:</label>
+            <input type="number" id="rows" name="rows" min="1" value="3" required>
+          </div>
+          <div class="input-group">
+            <label for="cols">Number of columns:</label>
+            <input type="number" id="cols" name="cols" min="1" value="3" required>
+          </div>
+          <div class="button-group">
+            <button type="submit">Insert</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(dialog);
+
+    const form = dialog.querySelector('form');
+    const cancelBtn = dialog.querySelector('#cancelBtn');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rows = (dialog.querySelector('#rows') as HTMLInputElement).value;
+      const cols = (dialog.querySelector('#cols') as HTMLInputElement).value;
+      dialog.close(`${rows},${cols}`);
+    });
+
+    cancelBtn?.addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.showModal();
+
+    dialog.addEventListener('close', () => {
+      if (dialog.returnValue && dialog.returnValue !== 'null') {
+        const [rows, cols] = dialog.returnValue.split(',');
+        const parsedRows = parseInt(rows);
+        const parsedCols = parseInt(cols);
+
+        if (!isNaN(parsedRows) && !isNaN(parsedCols)) {
+          let tableHtml = `
+            <table class="custom-table" style="width: 100%; max-width: 100%; border-collapse: collapse; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+              <thead>
+                <tr>`;
           for (let j = 0; j < parsedCols; j++) {
             tableHtml +=
-              '<td style="border: 1px solid #ddd; padding: 12px; height: 40px;">&nbsp;</td>';
+              '<th style="border: 1px solid #ddd; padding: 12px; background-color: #f4f4f4;">Column</th>';
           }
-          tableHtml += '</tr>';
+          tableHtml += `
+                </tr>
+              </thead>
+              <tbody>`;
+          for (let i = 0; i < parsedRows; i++) {
+            tableHtml += '<tr>';
+            for (let j = 0; j < parsedCols; j++) {
+              tableHtml +=
+                '<td style="border: 1px solid #ddd; padding: 12px; height: 40px;">&nbsp;</td>';
+            }
+            tableHtml += '</tr>';
+          }
+          tableHtml += `
+              </tbody>
+            </table>`;
+          this.insertHtmlAtCursor(tableHtml); // Insert the table HTML into the editor
         }
-        tableHtml += `
-            </tbody>
-          </table>`;
-        this.insertHtmlAtCursor(tableHtml); // Insert the table HTML into the editor
-      } else {
-        alert('Please enter valid numbers for rows and columns.');
       }
-    }
+      document.body.removeChild(dialog);
+      document.body.removeChild(overlay);
+    });
   }
 
   insertHtmlAtCursor(html: string): void {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
       const range = selection.getRangeAt(0);
-      const fragment = range.createContextualFragment(html);
-      range.insertNode(fragment);
+
+      // Check if the selection is within the editor
+      if (this.editor.nativeElement.contains(range.commonAncestorContainer)) {
+        const fragment = range.createContextualFragment(html);
+        range.deleteContents();
+        range.insertNode(fragment);
+
+        // Move the cursor to the end of the inserted content
+        range.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      } else {
+        // If the selection is not in the editor, append the content at the end
+        const fragment = document.createRange().createContextualFragment(html);
+        this.editor.nativeElement.appendChild(fragment);
+      }
+
+      // Ensure the editor gets focus
+      this.editor.nativeElement.focus();
     }
   }
 }

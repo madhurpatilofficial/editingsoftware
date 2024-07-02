@@ -231,13 +231,12 @@
         <mat-icon>highlight</mat-icon>
       </button>
       <div class="dropdown-content" *ngIf="showHighlightOptions">
-        <!-- Loop through colors array to create buttons or options -->
-        <button mat-button *ngFor="let color of colors" (click)="applyHighlight(color)">
-          <div class="color-box" [style.backgroundColor]="color"></div>
-        </button>
+        <div>
+          <color-sketch (onChangeComplete)="handleColorChange($event)"></color-sketch>
+        </div>
       </div>
     </div>
-
+    
     <button
       mat-icon-button
       title="Toggle Read-Only"
@@ -324,3 +323,5 @@
     ></div>
   </mat-form-field>
 </div>
+
+

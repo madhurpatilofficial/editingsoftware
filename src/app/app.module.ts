@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ColorSketchModule } from 'ngx-color/sketch';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     FormsModule,
     MatDialogModule,
+    ColorSketchModule
   ],
   providers: [
     provideAnimationsAsync()
