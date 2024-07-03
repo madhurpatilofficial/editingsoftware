@@ -73,8 +73,6 @@ a {
   color: rgb(19, 16, 214);
 }
 
-/* Add these to your existing styles or modify as needed */
-
 .dark-mode-toggle {
   display: flex;
   align-items: center;
@@ -86,6 +84,11 @@ a {
   color: inherit;
   font-size: 14px;
   transition: background-color 0.3s;
+}
+.dark-mode-toggle {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: black;
 }
 
 .dark-mode-toggle:hover {
@@ -168,7 +171,7 @@ a {
   .dark-mode-toggle .toggle-text {
     font-size: 12px;
   }
-  .navbar-brand{
+  .navbar-brand {
     margin-left: 10px;
   }
 }
