@@ -210,14 +210,24 @@
     >
       <mat-icon>copyright</mat-icon>
     </button>
-    <button
-      mat-icon-button
-      title="Insert Emoji"
-      (click)="insertEmoji('😊')"
-      class="fresh-color-2"
-    >
-      <mat-icon>insert_emoticon</mat-icon>
-    </button>
+    <div class="emoji-container"
+    (mouseenter)="openEmojiPicker()"
+    (mouseleave)="closeEmojiPicker()">
+ <button mat-icon-button
+         title="Insert Emoji"
+         class="fresh-color-2"
+         (mousedown)="$event.preventDefault()"
+         (click)="toggleEmojiPicker()">
+   😊
+ </button>
+ <div *ngIf="showEmojiPicker" class="emoji-picker">
+   <span *ngFor="let emoji of emojis"
+         (mousedown)="$event.preventDefault(); insertEmoji(emoji)">
+     {{emoji}}
+   </span>
+ </div>
+</div>
+
     <button
       mat-icon-button
       title="Insert Line Break"
@@ -251,9 +261,9 @@
     >
       <mat-icon>lock</mat-icon>
     </button>
-    <button mat-icon-button title="Word Count" (click)="alert(getWordCount())">
+    <!-- <button mat-icon-button title="Word Count" (click)="alert(getWordCount())">
       <mat-icon>spellcheck</mat-icon>
-    </button>
+    </button> -->
     <button
       mat-icon-button
       title="Fullscreen"
