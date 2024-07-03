@@ -162,11 +162,14 @@ a {
 @media screen and (max-width: 971px) {
   .collapse:not(.show) {
     display: block;
-    margin-left: 245px;
+    margin-left: 256px;
     margin-top: -72px;
   }
   .dark-mode-toggle .toggle-text {
     font-size: 12px;
+  }
+  .navbar-brand{
+    margin-left: 10px;
   }
 }
 
