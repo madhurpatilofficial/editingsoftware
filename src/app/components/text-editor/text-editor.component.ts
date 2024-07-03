@@ -134,7 +134,6 @@ emojis: string[] = [
     this.loadContent();
     this.autoSave();
   }
-
   format(command: string, value: string = ''): void {
     document.execCommand(command, false, value);
   }
