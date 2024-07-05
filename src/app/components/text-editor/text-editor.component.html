@@ -1,8 +1,5 @@
 <div class="editor-container">
-
   <div class="toolbar">
-
-    
     <button
       mat-icon-button
       title="Bold"
@@ -12,7 +9,6 @@
     >
       <mat-icon>format_bold</mat-icon>
     </button>
-
 
     <button
       mat-icon-button
@@ -215,23 +211,29 @@
     >
       <mat-icon>copyright</mat-icon>
     </button>
-    <div class="emoji-container"
-    (mouseenter)="openEmojiPicker()"
-    (mouseleave)="closeEmojiPicker()">
- <button mat-icon-button
-         title="Insert Emoji"
-         class="fresh-color-2"
-         (mousedown)="$event.preventDefault()"
-         (click)="toggleEmojiPicker()">
-   😊
- </button>
- <div *ngIf="showEmojiPicker" class="emoji-picker">
-   <span *ngFor="let emoji of emojis"
-         (mousedown)="$event.preventDefault(); insertEmoji(emoji)">
-     {{emoji}}
-   </span>
- </div>
-</div>
+    <div
+      class="emoji-container"
+      (mouseenter)="openEmojiPicker()"
+      (mouseleave)="closeEmojiPicker()"
+    >
+      <button
+        mat-icon-button
+        title="Insert Emoji"
+        class="fresh-color-2"
+        (mousedown)="$event.preventDefault()"
+        (click)="toggleEmojiPicker()"
+      >
+        😊
+      </button>
+      <div *ngIf="showEmojiPicker" class="emoji-picker">
+        <span
+          *ngFor="let emoji of emojis"
+          (mousedown)="$event.preventDefault(); insertEmoji(emoji)"
+        >
+          {{ emoji }}
+        </span>
+      </div>
+    </div>
 
     <button
       mat-icon-button
@@ -266,9 +268,7 @@
     >
       <mat-icon>lock</mat-icon>
     </button>
-    <!-- <button mat-icon-button title="Word Count" (click)="alert(getWordCount())">
-      <mat-icon>spellcheck</mat-icon>
-    </button> -->
+
     <button
       mat-icon-button
       title="Fullscreen"
@@ -329,13 +329,23 @@
     >
       <mat-icon>{{ isVoiceTyping ? "mic_off" : "mic" }}</mat-icon>
     </button>
+
   </div>
 </div>
 <div class="editor-container">
-  <button type="button" class="btn btn-success savebtn" (click)="saveContent()">
-    Save
-  </button>
-
+  <div class="button-group">
+    <button type="button" class="btn btn-success savebtn" (click)="saveContent()">
+      Save
+    </button>
+    <button
+      mat-icon-button
+      title="{{ isReading ? 'Stop Reading' : 'Start Reading' }}"
+      (click)="isReading ? stopReading() : startReading()"
+      class="fresh-color-1 read-btn title"
+    >
+      <mat-icon>{{ isReading ? "stop" : "play_arrow" }}</mat-icon>
+    </button>
+  </div>
   <mat-form-field appearance="fill" class="editor-field">
     <div
       #editor

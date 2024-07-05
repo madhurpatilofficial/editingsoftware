@@ -634,12 +634,75 @@ export class TextEditorComponent implements OnInit {
   isSpeaking: boolean = false;
   textToSpeak: string = '';
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  availableVoices: SpeechSynthesisVoice[] = [];
+  selectedVoice: SpeechSynthesisVoice | null = null;
+  isReading: boolean = false;
+  private speechSynthesis: SpeechSynthesis;
+  private speechUtterance: SpeechSynthesisUtterance | null = null;
 
+  constructor(private cdr: ChangeDetectorRef) {
+    this.speechSynthesis = window.speechSynthesis;
+  }
   ngOnInit(): void {
     this.loadContent();
-    this.autoSave();
+    this.loadVoices();
+
+    // Attempt to load voices immediately as well
+    this.availableVoices = window.speechSynthesis.getVoices();
+    if (this.availableVoices.length > 0) {
+      this.selectedVoice = this.availableVoices[0];
+    }
   }
+
+  ngOnDestroy(): void {
+    this.stopReading();
+  }
+
+  loadVoices(): void {
+    console.log('Loading voices...');
+    this.availableVoices = this.speechSynthesis.getVoices();
+
+    console.log('Available voices:', this.availableVoices);
+
+    if (this.availableVoices.length > 0) {
+      this.selectedVoice = this.availableVoices[0];
+    }
+
+    this.cdr.detectChanges();
+  }
+
+  startReading(): void {
+    if (!this.isReading) {
+      const text = this.editor.nativeElement.innerText;
+      this.speechUtterance = new SpeechSynthesisUtterance(text);
+
+      if (this.selectedVoice) {
+        this.speechUtterance.voice = this.selectedVoice;
+      }
+
+      this.speechUtterance.onend = () => {
+        this.isReading = false;
+        this.cdr.detectChanges();
+      };
+
+      this.speechSynthesis.speak(this.speechUtterance);
+      this.isReading = true;
+    }
+  }
+
+  stopReading(): void {
+    if (this.isReading) {
+      this.speechSynthesis.cancel();
+      this.isReading = false;
+    }
+  }
+
+  changeVoice(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedVoiceName = selectElement.value;
+    this.selectedVoice = this.availableVoices.find(voice => voice.name === selectedVoiceName) || null;
+  }
+
   format(command: string, value: string = ''): void {
     document.execCommand(command, false, value);
   }
