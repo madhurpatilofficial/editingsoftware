@@ -1,3 +1,5 @@
+
+
 .editor-container {
   width: 80%;
   margin: 0 auto;
@@ -6,7 +8,8 @@
   border-radius: 4px;
   margin-top: 5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px #d62d2d80;
+box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2); /* subtle blue glow */
+
   transition: transform 0.7s ease-in-out;
   box-sizing: border-box;
   background-color: #f9f9f9;
@@ -368,5 +371,78 @@ img {
     font-size: 20px;
     width: 35px;
     height: 35px;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-save, .btn-read {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-save {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #3e8e41;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+}
+
+.btn-read {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn-read:hover {
+  background-color: #0b7dda;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-read:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+}
+
+.btn-text {
+  white-space: nowrap;
+}
+
+/* For a more compact version on mobile */
+@media (max-width: 480px) {
+  .btn-save, .btn-read {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .button-group {
+    gap: 8px;
   }
 }

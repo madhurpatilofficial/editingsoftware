@@ -333,19 +333,25 @@
   </div>
 </div>
 <div class="editor-container">
-  <div class="button-group">
-    <button type="button" class="btn btn-success savebtn" (click)="saveContent()">
-      Save
-    </button>
-    <button
-      mat-icon-button
-      title="{{ isReading ? 'Stop Reading' : 'Start Reading' }}"
-      (click)="isReading ? stopReading() : startReading()"
-      class="fresh-color-1 read-btn title"
-    >
-      <mat-icon>{{ isReading ? "stop" : "play_arrow" }}</mat-icon>
-    </button>
-  </div>
+<div class="button-group">
+  <button type="button" class="btn btn-save" (click)="saveContent()">
+    <span class="btn-icon">
+      <svg viewBox="0 0 24 24" width="20" height="20">
+        <path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+      </svg>
+    </span>
+    <span class="btn-text">Save Content</span>
+  </button>
+  
+  <button class="btn-read" title="{{ isReading ? 'Stop Reading' : 'Start Reading' }}" (click)="isReading ? stopReading() : startReading()">
+    <span class="btn-icon">
+      <svg viewBox="0 0 24 24" width="20" height="20">
+        <path fill="currentColor" [attr.d]="isReading ? 'M6 6h12v12H6z' : 'M8 5v14l11-7z'"/>
+      </svg>
+    </span>
+    <span class="btn-text">{{ isReading ? 'Stop' : 'Play' }}</span>
+  </button>
+</div>
   <mat-form-field appearance="fill" class="editor-field">
     <div
       #editor

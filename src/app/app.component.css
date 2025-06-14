@@ -3,7 +3,7 @@
 }
 
 .nv {
-  background-color: #1b9cfc;
+  background-color: #ffffff;
   margin-top: 0;
   padding: 0;
   height: 100px;
@@ -21,6 +21,7 @@
 .navbar-brand {
   margin-left: 40px;
   background: linear-gradient(90deg, #c91d78, #6610c1);
+  font-weight: 500;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -15,11 +15,19 @@ export class AppComponent implements OnInit {
     this.applyDarkMode();
   }
 
-  toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
-    localStorage.setItem('darkMode', this.isDarkMode.toString());
-    this.applyDarkMode();
+// layout.component.ts
+toggleDarkMode(): void {
+  this.isDarkMode = !this.isDarkMode;
+  const body = document.body;
+  if (this.isDarkMode) {
+    body.classList.add('dark-mode');
+    body.classList.remove('light-mode');
+  } else {
+    body.classList.remove('dark-mode');
+    body.classList.add('light-mode');
   }
+}
+
 
   applyDarkMode(): void {
     if (this.isDarkMode) {
