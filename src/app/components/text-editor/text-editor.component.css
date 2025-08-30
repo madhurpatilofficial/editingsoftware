@@ -288,6 +288,9 @@ img {
 .button-group {
   display: flex;
   align-items: flex-end;
+
+      margin-left: 18px;
+    margin-top: 10px;
 }
 
 .savebtn {

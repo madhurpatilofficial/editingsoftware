@@ -62,6 +62,7 @@ export class TextEditorComponent implements OnInit {
     '#FF9800',
     '#FF5722',
   ];
+  
   // In your component file
   emojis: string[] = [
     '😀',
